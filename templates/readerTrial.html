@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF Reader</title>
+    <style>
+        .back-button {
+            margin: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <button class="back-button" onclick="goBack()">Back to Results</button>
+    <div class="pdf-container">
+        <iframe id="pdfFrame" width="100%" height="600px"></iframe>
+    </div>
+
+    <script>
+        // Function to get URL parameters
+        function getUrlParameter(name) {
+            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+            var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+            var results = regex.exec(location.search);
+            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+        }
+
+        // Get the PDF URL from the query parameter and set it in the iframe
+        var pdfUrl = getUrlParameter('url');
+        document.getElementById('pdfFrame').src = pdfUrl;
+
+        // Function to go back to the results page
+        function goBack() {
+            window.location.href = '/show_book'; // Update this URL to match your results page route
+        }
+    </script>
+</body>
+</html>
